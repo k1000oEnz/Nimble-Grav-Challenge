@@ -14,10 +14,8 @@ export default function PositionsList({positions = [], email = '', candidate = n
                 const id = position && typeof position === 'object' ? position.id || index : index;
 
                 const handleSubmit = async () => {
-                    debugger;
                     if (!candidate) return alert('No se ha encontrado el candidato. Por favor, ingrese un correo válido y vuelva a intentarlo.');
                     const gitHubUrl = values[id] || '';
-                    console.log(gitHubUrl);
                     if (!gitHubUrl) return alert('Por favor, ingrese la URL de su repositorio de GitHub.');
                     const body = {
                         uuid: candidate.uuid,
@@ -26,7 +24,6 @@ export default function PositionsList({positions = [], email = '', candidate = n
                         candidateId: candidate.candidateId,
                         repoUrl: gitHubUrl,
                     };
-                    console.log(body);
 
                     setStatus(prev => ({...prev, [id]: 'Enviando...'}));
                     try {

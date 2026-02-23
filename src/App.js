@@ -22,7 +22,6 @@ function App() {
         throw new Error('Error al obtener los datos del candidato.' + '\n' + candidateResponse.statusText);
       }
       const candidateData = await candidateResponse.json();
-      console.log(candidateData);
       setCandidate(candidateData);
 
       const positionsUrl = process.env.REACT_APP_BASE_URL + `/api/jobs/get-list`;
@@ -31,7 +30,6 @@ function App() {
         throw new Error('Error al obtener las posiciones disponibles.' + '\n' + positionsResponse.statusText);
       }
       const positionsData = await positionsResponse.json();
-      console.log(positionsData);
       setDatos(positionsData);
       } catch (error) {
         alert(`Error: ${error.message}`);;
