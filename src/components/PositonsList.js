@@ -22,6 +22,7 @@ export default function PositionsList({positions = [], email = '', candidate = n
                     const body = {
                         uuid: candidate.uuid,
                         jobId: position.id || id,
+                        applicationId: candidate.applicationId,
                         candidateId: candidate.candidateId,
                         repoUrl: gitHubUrl,
                     };
@@ -37,7 +38,14 @@ export default function PositionsList({positions = [], email = '', candidate = n
                         });
                         if (!res.ok) {
                             const errorData = await res.json();
-                            throw new Error(errorData.message || 'Error al enviar la aplicación.')};
+                            throw new Error(errorData.message || 'Error al enviar la aplicación.')
+                        };
+                        if (res.ok) {
+                            alert('¡Postulación enviada con éxito!');
+                            setStatus(prev => ({...prev, [id]: 'Enviado'}));
+                            
+                            setValues(prev => ({...prev, [id]: ''}));
+                        }
                         } catch (error) {
                             alert(`Error: ${error.message}`);
                             setStatus(prev => ({...prev, [id]: 'Error al enviar'}));
@@ -60,7 +68,6 @@ export default function PositionsList({positions = [], email = '', candidate = n
                                 {status[id] === 'Enviando...' ? 'Enviando...' : 'Enviar'}
                             </button>
                         </div>
-                        {status[id] && <div className="status-message">{status[id]}</div>}
                     </li>
                 );
             })}
