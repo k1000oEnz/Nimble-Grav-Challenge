@@ -46,12 +46,13 @@ function App() {
 
         <div className="input-container">
           <input 
+            className='email-input'
             type="email" 
             placeholder="Ingrese el correo del postulante" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
           />
-          <button onClick={handleFetch} disabled={loading}>
+          <button className='getpositions-button' onClick={handleFetch} disabled={loading}>
             {loading ? 'Cargando...' : 'Obtener posiciones'}
           </button>
         </div>
@@ -62,8 +63,8 @@ function App() {
                   <p>Ya podés ver las posiciones disponibles abajo.</p>
                 </div>
         )}
-      </header>
       <PositionsList positions={datos} email={email} candidate={candidate} />
+      </header>
     </div>
     
   );
